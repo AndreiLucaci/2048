@@ -1,0 +1,13 @@
+E:\Programming\Projects\2048\Git\2048\2048\bin\Debug\2048.exe.config
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\_2048.Form1.resources
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\_2048.Grid.resources
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\_2048.Popup.resources
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\_2048.Properties.Resources.resources
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\_2048.Reach2048.resources
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\_2048.Tile.resources
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\2048.csproj.GenerateResource.Cache
+E:\Programming\Projects\2048\Git\2048\2048\bin\Debug\2048.exe
+E:\Programming\Projects\2048\Git\2048\2048\bin\Debug\2048.pdb
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\2048.exe
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\2048.pdb
+E:\Programming\Projects\2048\Git\2048\2048\obj\Debug\2048.csprojResolveAssemblyReference.cache
