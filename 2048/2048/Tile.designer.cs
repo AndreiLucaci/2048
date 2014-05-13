@@ -1,4 +1,4 @@
-﻿namespace _2048
+﻿namespace _2048_gridView
 {
     partial class Tile
     {

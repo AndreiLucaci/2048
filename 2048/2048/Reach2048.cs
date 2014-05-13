@@ -10,13 +10,13 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Threading;
 
-namespace _2048
+namespace _2048_gridView
 {
     public partial class Reach2048 : Form
     {
         public event EventHandler Continue;
         public event EventHandler Reset;
-        public Reach2048(MainWindow parent)
+        public Reach2048(Form1 parent)
         {
             InitializeComponent();
             try
@@ -83,7 +83,7 @@ namespace _2048
             //this.Close();
             //try
             //{
-            //    (this.Parent as MainWindow).MainGrid.ResetGame();
+            //    (this.Parent as Form1).MainGrid.ResetGame();
             //}
             //catch (Exception) { }
             //this.Close();

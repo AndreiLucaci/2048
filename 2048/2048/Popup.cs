@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Threading;
 
-namespace _2048
+namespace _2048_gridView
 {
     public partial class Popup : Form
     {
@@ -31,11 +31,6 @@ namespace _2048
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
             proc.StartInfo.FileName = "mailto:" + linkLabel1.Text;
             proc.Start();
-        }
-
-        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start(linkLabel2.Text as String);
         }
     }
 }

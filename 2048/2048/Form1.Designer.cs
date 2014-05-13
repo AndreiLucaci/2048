@@ -1,6 +1,6 @@
-﻿namespace _2048
+﻿namespace _2048_gridView
 {
-    partial class MainWindow
+    partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -38,9 +38,10 @@
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.grid1 = new _2048.Grid();
             this.score_lbl = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.move_lbl = new System.Windows.Forms.Label();
+            this.grid1 = new _2048_gridView.Grid();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -63,6 +64,7 @@
             this.toolStripContainer1.ContentPanel.Controls.Add(this.grid1);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.score_lbl);
             this.toolStripContainer1.ContentPanel.Controls.Add(this.button1);
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.move_lbl);
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(528, 526);
             this.toolStripContainer1.ContentPanel.Load += new System.EventHandler(this.toolStripContainer1_ContentPanel_Load);
             this.toolStripContainer1.ContentPanel.MouseHover += new System.EventHandler(this.toolStripContainer1_ContentPanel_MouseHover);
@@ -117,7 +119,7 @@
             // 
             this.toolStripButton1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::_2048.Properties.Resources.close;
+            this.toolStripButton1.Image = global::_2048_gridView.Properties.Resources.close;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
@@ -128,8 +130,8 @@
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(16, 22);
-            this.toolStripLabel2.Text = "   ";
+            this.toolStripLabel2.Size = new System.Drawing.Size(10, 22);
+            this.toolStripLabel2.Text = " ";
             // 
             // newToolStripButton
             // 
@@ -176,18 +178,6 @@
             this.helpToolStripButton.Text = "He&lp";
             this.helpToolStripButton.Click += new System.EventHandler(this.helpToolStripButton_Click);
             // 
-            // grid1
-            // 
-            this.grid1.CurrentSaveGame = null;
-            this.grid1.Location = new System.Drawing.Point(31, 53);
-            this.grid1.Name = "grid1";
-            this.grid1.Score = 0;
-            this.grid1.Size = new System.Drawing.Size(465, 464);
-            this.grid1.StartingTiles = 2;
-            this.grid1.TabIndex = 0;
-            this.grid1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid1_KeyDown);
-            this.grid1.MouseHover += new System.EventHandler(this.grid1_MouseHover);
-            // 
             // score_lbl
             // 
             this.score_lbl.AutoSize = true;
@@ -209,9 +199,33 @@
             this.button1.TabIndex = 2;
             this.button1.Text = "Reset";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // MainWindow
+            // move_lbl
+            // 
+            this.move_lbl.AutoSize = true;
+            this.move_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 29F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(0)));
+            this.move_lbl.Location = new System.Drawing.Point(266, 25);
+            this.move_lbl.Name = "move_lbl";
+            this.move_lbl.Size = new System.Drawing.Size(117, 33);
+            this.move_lbl.TabIndex = 3;
+            this.move_lbl.Text = "Moves: ";
+            // 
+            // grid1
+            // 
+            this.grid1.CurrentMoves = 0;
+            this.grid1.CurrentSaveGame = null;
+            this.grid1.Location = new System.Drawing.Point(31, 53);
+            this.grid1.Name = "grid1";
+            this.grid1.Score = 0;
+            this.grid1.Size = new System.Drawing.Size(465, 464);
+            this.grid1.StartingTiles = 2;
+            this.grid1.TabIndex = 0;
+            this.grid1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.grid1_KeyDown);
+            this.grid1.MouseHover += new System.EventHandler(this.grid1_MouseHover);
+            // 
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -220,11 +234,13 @@
             this.Controls.Add(this.toolStripContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(550, 570);
             this.MinimumSize = new System.Drawing.Size(550, 570);
-            this.Name = "MainWindow";
+            this.Name = "Form1";
             this.Text = "2048";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ContentPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
@@ -249,6 +265,7 @@
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
+        private System.Windows.Forms.Label move_lbl;
     }
 }
 

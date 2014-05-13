@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _2048
+namespace _2048_gridView
 {
     public class MaskedDialog : Form
     {
@@ -32,7 +32,7 @@ namespace _2048
         public static DialogResult ShowDialog(Form parent, Form dialog)
         {
             var mask = new MaskedDialog(parent, dialog);
-            (parent as MainWindow).ClosePopup += MaskedDialog_ClosePopup;
+            (parent as Form1).ClosePopup += MaskedDialog_ClosePopup;
             dialog.StartPosition = FormStartPosition.CenterParent;
             mask.Show();
             var result = dialog.ShowDialog(mask);

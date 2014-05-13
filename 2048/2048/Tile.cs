@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
 
-namespace _2048
+namespace _2048_gridView
 {
     [Serializable]
     public partial class Tile : UserControl
@@ -21,7 +21,7 @@ namespace _2048
         public string Value
         {
             get { return _value; }
-            set 
+            set
             {
                 _value = value;
                 tile_value.Text = _value;
@@ -35,14 +35,14 @@ namespace _2048
                         break;
                     case "8":
                         tile_value.ForeColor = ColorTranslator.FromHtml("#f9f6f2");
-                        tile_value.Font = new System.Drawing.Font(tile_value.Font.FontFamily, 55, System.Drawing.GraphicsUnit.Pixel );
+                        tile_value.Font = new System.Drawing.Font(tile_value.Font.FontFamily, 55, System.Drawing.GraphicsUnit.Pixel);
                         tile_value.Location = new System.Drawing.Point(23, 23);
                         break;
                     case "16":
                     case "32":
                     case "64":
                         tile_value.ForeColor = ColorTranslator.FromHtml("#f9f6f2");
-                        tile_value.Font = new System.Drawing.Font(tile_value.Font.FontFamily, 55, System.Drawing.GraphicsUnit.Pixel );
+                        tile_value.Font = new System.Drawing.Font(tile_value.Font.FontFamily, 55, System.Drawing.GraphicsUnit.Pixel);
                         tile_value.Location = new System.Drawing.Point(6, 23);
                         break;
                     case "128":
@@ -71,7 +71,8 @@ namespace _2048
             }
         }
         private TileNumbers _type;
-        public TileNumbers Type {
+        public TileNumbers Type
+        {
             get { return _type; }
             set
             {
@@ -224,43 +225,5 @@ namespace _2048
                 return true;
             else return base.IsInputKey(keyData);
         }
-
-        
-    }
-
-    public class Worker
-    {
-        public event EventHandler<ProgressChangedArgs> ProgressChanged;
-
-        protected void OnProgressChanged(ProgressChangedArgs e)
-        {
-            if (ProgressChanged != null)
-            {
-                ProgressChanged(this, e);
-            }
-        }
-
-        public void StartWork()
-        {
-            //Thread.Sleep(1000);
-            OnProgressChanged(new ProgressChangedArgs("Progress Changed"));
-            //Thread.Sleep(1000);
-        }
-    }
-
-
-    public class ProgressChangedArgs : EventArgs
-    {
-        public string Progress { get; private set; }
-        public ProgressChangedArgs(string progress)
-        {
-            Progress = progress;
-        }
-
-        public ProgressChangedArgs(float size)
-        {
-            Size = size;
-        }
-        public float Size { get; set; }
     }
 }

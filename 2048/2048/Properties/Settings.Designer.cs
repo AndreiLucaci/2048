@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace _2048.Properties
+namespace _2048_gridView.Properties
 {
 
 

@@ -12,19 +12,21 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 
-namespace _2048
+namespace _2048_gridView
 {
     [Serializable]
     public partial class Grid : UserControl
     {
         public Tile[,] Tiles { get; private set; }
+        
         public event EventHandler UpdateScore;
+        public event EventHandler<UpdateMovesEventArgs> UpdateMoves;
         private Random rnd = new Random(DateTime.UtcNow.Millisecond);
         private bool modified = false;
         private int _score;
         private System.Windows.Forms.Timer _timer;
-        private bool endGame = false;
         public int Score
         {
             get { return _score; }
@@ -32,6 +34,7 @@ namespace _2048
             {
                 _score = value;
                 modified = true;
+                if (value == 0) CurrentMoves = 0;
                 if (UpdateScore != null) UpdateScore(this, EventArgs.Empty);
             }
         }
@@ -53,14 +56,25 @@ namespace _2048
             };
 
             StartingTiles = 2;
-            //tile10.Type = TileNumbers.Tile2;
+            ////tile10.Type = TileNumbers.Tile2;
             //tile2.Type = TileNumbers.Tile2;
             //tile6.Type = TileNumbers.Tile2;
-            //tile12.Type = TileNumbers.Tile2;
+            ////tile12.Type = TileNumbers.Tile2;
             //tile13.Type = TileNumbers.Tile2;
             //tile14.Type = TileNumbers.Tile1024;
-            //tile15.Type = TileNumbers.Tile1024;
+            //tile15.Type = TileNumbers.Tile16;
             //tile16.Type = TileNumbers.Tile4;
+
+            //tile9.Type = TileNumbers.Tile16;
+            //tile10.Type = TileNumbers.Tile16;
+            //tile11.Type = TileNumbers.Tile16;
+            //tile12.Type = TileNumbers.Tile16;
+
+
+            //tile1.Type = TileNumbers.Tile16;
+            //tile5.Type = TileNumbers.Tile16;
+            //tile9.Type = TileNumbers.Tile16;
+            //tile13.Type = TileNumbers.Tile16;
 
             GenerateStartingTiles();
         }
@@ -80,7 +94,6 @@ namespace _2048
 
             GenerateStartingTiles();
             Score = 0;
-            endGame = false;
         }
 
         private void GenerateStartingTiles()
@@ -91,8 +104,11 @@ namespace _2048
             }
         }
 
+
+        private int gens = 0;
         public void GenerateTile()
         {
+            //if (gens++ > 2) return; 
             NormalizeTiles();
             int val = (rnd.NextDouble() < 0.9) ? 2 : 4;
             var pos = GetFreePositions();
@@ -127,9 +143,20 @@ namespace _2048
         private int[] GetRandomTile(List<Tuple<int, int>> pos)
         {
             int[] res = new int[2];
-            var rpos = pos[rnd.Next(0, pos.Count - 1)];
-            res[0] = rpos.Item1;
-            res[1] = rpos.Item2;
+            //var rpos = pos[rnd.Next(0, pos.Count - 1)];
+            //res[0] = rpos.Item1;
+            //res[1] = rpos.Item2;
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] rndByte = new byte[4];
+            rng.GetBytes(rndByte);
+            int rand = BitConverter.ToInt32(rndByte, 0);
+            int poslen = pos.Count;
+            Tuple<int, int> posses;
+            if (poslen != 0)
+                posses = pos[Math.Abs(rand) % (poslen)];
+            else posses = pos[0];
+            res[0] = posses.Item1;
+            res[1] = posses.Item2;
             return res;
         }
 
@@ -137,7 +164,6 @@ namespace _2048
         {
             try
             {
-                //Thread.Sleep(100);
                 switch (move)
                 {
                     case Moves.Up:
@@ -158,11 +184,28 @@ namespace _2048
                 {
                     GenerateTile();
                     modified = false;
+                    CurrentMoves++;
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message + ex.StackTrace);
+            }
+        }
+
+        private int currentMoves = 0;
+
+        public int CurrentMoves
+        {
+            get { return currentMoves; }
+            set
+            {
+                currentMoves = value;
+                var args = new UpdateMovesEventArgs(this.CurrentMoves);
+                if (UpdateMoves != null)
+                {
+                    UpdateMoves(this, args);
+                }
             }
         }
 
@@ -191,20 +234,39 @@ namespace _2048
             catch (Exception) { }
         }
 
+        private void Animate(Tile start, Tile end, Moves move)
+        {
+            switch (move)
+            {
+                case Moves.Down:
+                    break;
+                case Moves.Left:
+                    break;
+                case Moves.Right:
+                    break;
+                case Moves.Up:
+                    AnimateUp(start, end);
+                    break;
+            }
+        }
+
+        private int flags;
+        private void AnimateUp(Tile start, Tile end)
+        {
+            flags = WinAPI.AW_ACTIVATE | WinAPI.AW_VER_NEGATIVE;
+            flags |= WinAPI.AW_SLIDE;
+            WinAPI.AnimateWindow(end.Handle, 1000, flags);
+        }
+
         public event EventHandler Reached2048;
 
         private void Merge(Tile first, Tile second)
         {
             var val = Int(first.Value) + Int(second.Value);
-            if (val == 2048 && !endGame)
-            {
-                endGame = true;
-                _timer.Start();
-            }
+            if (val == 2048) _timer.Start();
             Score += val;
             first.Type = Helper.ValueToTile(val.ToString());
             second.Type = TileNumbers.TileEmpty;
-
         }
 
         private void MoveLeft()
@@ -242,9 +304,9 @@ namespace _2048
                         if (CanMerge(i, j, Moves.Right))
                         {
                             Merge(Tiles[i, j], Tiles[i, j - 1]);
-                            ColapseRight(j);
+                            ColapseRight(i);
                         }
-                        ColapseRight(j);
+                        ColapseRight(i);
                     }
                     ColapseAllRight();
                 }
@@ -499,6 +561,16 @@ namespace _2048
             return -1;
         }
 
+        private int GetNextRightTile(int i, int j, bool dummy)
+        {
+            for (; --j != 1; )
+            {
+                if (Tiles[i, j].Type == TileNumbers.TileEmpty) continue;
+                return j;
+            }
+            return -1;
+        }
+
         private int GetNextLeftTile(int i, int j)
         {
             j++;
@@ -542,11 +614,27 @@ namespace _2048
         }
 
 
+
+        void Grid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Up)
+                KeyMove(Moves.Up);
+            else if (e.KeyCode == Keys.Down)
+                KeyMove(Moves.Down);
+            else if (e.KeyCode == Keys.Left)
+                KeyMove(Moves.Left);
+            else if (e.KeyCode == Keys.Right)
+                KeyMove(Moves.Right);
+        }
         protected override bool IsInputKey(Keys keyData)
         {
-            if (keyData == Keys.Right || keyData == Keys.Up || keyData == Keys.Down || keyData == Keys.Left)
+            if (keyData == Keys.Right || keyData == Keys.Up || keyData == Keys.Down || keyData == Keys.Left || keyData == Keys.F2)
                 return true;
             else return base.IsInputKey(keyData);
+        }
+
+        public void UpdateTile(int i, int j, TileNumbers type)
+        {
         }
 
         private void grid_layout_Paint(object sender, PaintEventArgs e)
@@ -564,7 +652,7 @@ namespace _2048
 
         public void SaveGame(string filename)
         {
-            CurrentSaveGame = new SaveGame(this.Tiles, this.Score);
+            CurrentSaveGame = new SaveGame(this.Tiles, this.Score, this.CurrentMoves);
             CurrentSaveGame.SaveGameToFile(filename);
         }
 
@@ -573,6 +661,7 @@ namespace _2048
             var LoadNewGame = new SaveGame();
             LoadNewGame.LoadGameFromFile(filename);
             this.Score = LoadNewGame.Score;
+            this.CurrentMoves = LoadNewGame.Moves;
             var tiles = LoadNewGame.GetTiles();
             for (int i = 0; i < 4; i++)
             {

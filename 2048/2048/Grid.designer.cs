@@ -1,4 +1,4 @@
-﻿namespace _2048
+﻿namespace _2048_gridView
 {
     partial class Grid
     {
@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.grid_layout = new System.Windows.Forms.FlowLayoutPanel();
-            this.tile1 = new _2048.Tile();
-            this.tile2 = new _2048.Tile();
-            this.tile3 = new _2048.Tile();
-            this.tile4 = new _2048.Tile();
-            this.tile5 = new _2048.Tile();
-            this.tile6 = new _2048.Tile();
-            this.tile7 = new _2048.Tile();
-            this.tile8 = new _2048.Tile();
-            this.tile9 = new _2048.Tile();
-            this.tile10 = new _2048.Tile();
-            this.tile11 = new _2048.Tile();
-            this.tile12 = new _2048.Tile();
-            this.tile13 = new _2048.Tile();
-            this.tile14 = new _2048.Tile();
-            this.tile15 = new _2048.Tile();
-            this.tile16 = new _2048.Tile();
+            this.tile1 = new _2048_gridView.Tile();
+            this.tile2 = new _2048_gridView.Tile();
+            this.tile3 = new _2048_gridView.Tile();
+            this.tile4 = new _2048_gridView.Tile();
+            this.tile5 = new _2048_gridView.Tile();
+            this.tile6 = new _2048_gridView.Tile();
+            this.tile7 = new _2048_gridView.Tile();
+            this.tile8 = new _2048_gridView.Tile();
+            this.tile9 = new _2048_gridView.Tile();
+            this.tile10 = new _2048_gridView.Tile();
+            this.tile11 = new _2048_gridView.Tile();
+            this.tile12 = new _2048_gridView.Tile();
+            this.tile13 = new _2048_gridView.Tile();
+            this.tile14 = new _2048_gridView.Tile();
+            this.tile15 = new _2048_gridView.Tile();
+            this.tile16 = new _2048_gridView.Tile();
             this.grid_layout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,7 +85,7 @@
             this.tile1.Size = new System.Drawing.Size(110, 110);
             this.tile1.TabIndex = 0;
             this.tile1.TextFont = null;
-            this.tile1.Type = _2048.TileNumbers.TileEmpty;
+            this.tile1.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile1.Value = "";
             // 
             // tile2
@@ -99,7 +99,7 @@
             this.tile2.Size = new System.Drawing.Size(110, 110);
             this.tile2.TabIndex = 1;
             this.tile2.TextFont = null;
-            this.tile2.Type = _2048.TileNumbers.TileEmpty;
+            this.tile2.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile2.Value = "";
             // 
             // tile3
@@ -113,7 +113,7 @@
             this.tile3.Size = new System.Drawing.Size(110, 110);
             this.tile3.TabIndex = 2;
             this.tile3.TextFont = null;
-            this.tile3.Type = _2048.TileNumbers.TileEmpty;
+            this.tile3.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile3.Value = "";
             // 
             // tile4
@@ -127,7 +127,7 @@
             this.tile4.Size = new System.Drawing.Size(110, 110);
             this.tile4.TabIndex = 3;
             this.tile4.TextFont = null;
-            this.tile4.Type = _2048.TileNumbers.TileEmpty;
+            this.tile4.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile4.Value = "";
             // 
             // tile5
@@ -141,7 +141,7 @@
             this.tile5.Size = new System.Drawing.Size(110, 110);
             this.tile5.TabIndex = 4;
             this.tile5.TextFont = null;
-            this.tile5.Type = _2048.TileNumbers.TileEmpty;
+            this.tile5.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile5.Value = "";
             // 
             // tile6
@@ -155,7 +155,7 @@
             this.tile6.Size = new System.Drawing.Size(110, 110);
             this.tile6.TabIndex = 5;
             this.tile6.TextFont = null;
-            this.tile6.Type = _2048.TileNumbers.TileEmpty;
+            this.tile6.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile6.Value = "";
             // 
             // tile7
@@ -169,7 +169,7 @@
             this.tile7.Size = new System.Drawing.Size(110, 110);
             this.tile7.TabIndex = 6;
             this.tile7.TextFont = null;
-            this.tile7.Type = _2048.TileNumbers.TileEmpty;
+            this.tile7.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile7.Value = "";
             // 
             // tile8
@@ -183,7 +183,7 @@
             this.tile8.Size = new System.Drawing.Size(110, 110);
             this.tile8.TabIndex = 7;
             this.tile8.TextFont = null;
-            this.tile8.Type = _2048.TileNumbers.TileEmpty;
+            this.tile8.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile8.Value = "";
             // 
             // tile9
@@ -197,7 +197,7 @@
             this.tile9.Size = new System.Drawing.Size(110, 110);
             this.tile9.TabIndex = 8;
             this.tile9.TextFont = null;
-            this.tile9.Type = _2048.TileNumbers.TileEmpty;
+            this.tile9.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile9.Value = "";
             // 
             // tile10
@@ -211,7 +211,7 @@
             this.tile10.Size = new System.Drawing.Size(110, 110);
             this.tile10.TabIndex = 9;
             this.tile10.TextFont = null;
-            this.tile10.Type = _2048.TileNumbers.TileEmpty;
+            this.tile10.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile10.Value = "";
             // 
             // tile11
@@ -225,7 +225,7 @@
             this.tile11.Size = new System.Drawing.Size(110, 110);
             this.tile11.TabIndex = 10;
             this.tile11.TextFont = null;
-            this.tile11.Type = _2048.TileNumbers.TileEmpty;
+            this.tile11.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile11.Value = "";
             // 
             // tile12
@@ -239,7 +239,7 @@
             this.tile12.Size = new System.Drawing.Size(110, 110);
             this.tile12.TabIndex = 11;
             this.tile12.TextFont = null;
-            this.tile12.Type = _2048.TileNumbers.TileEmpty;
+            this.tile12.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile12.Value = "";
             // 
             // tile13
@@ -253,7 +253,7 @@
             this.tile13.Size = new System.Drawing.Size(110, 110);
             this.tile13.TabIndex = 12;
             this.tile13.TextFont = null;
-            this.tile13.Type = _2048.TileNumbers.TileEmpty;
+            this.tile13.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile13.Value = "";
             // 
             // tile14
@@ -267,7 +267,7 @@
             this.tile14.Size = new System.Drawing.Size(110, 110);
             this.tile14.TabIndex = 13;
             this.tile14.TextFont = null;
-            this.tile14.Type = _2048.TileNumbers.TileEmpty;
+            this.tile14.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile14.Value = "";
             // 
             // tile15
@@ -281,7 +281,7 @@
             this.tile15.Size = new System.Drawing.Size(110, 110);
             this.tile15.TabIndex = 14;
             this.tile15.TextFont = null;
-            this.tile15.Type = _2048.TileNumbers.TileEmpty;
+            this.tile15.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile15.Value = "";
             // 
             // tile16
@@ -295,7 +295,7 @@
             this.tile16.Size = new System.Drawing.Size(110, 110);
             this.tile16.TabIndex = 15;
             this.tile16.TextFont = null;
-            this.tile16.Type = _2048.TileNumbers.TileEmpty;
+            this.tile16.Type = _2048_gridView.TileNumbers.TileEmpty;
             this.tile16.Value = "";
             // 
             // Grid

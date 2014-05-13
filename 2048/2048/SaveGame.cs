@@ -7,12 +7,19 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _2048
+namespace _2048_gridView
 {
     [Serializable]
     public class SaveGame
     {
         private int _score;
+        private int _moves;
+
+        public int Moves
+        {
+            get { return _moves; }
+            set { _moves = value; }
+        }
         private int[,] tiles;
 
         public SaveGame()
@@ -20,9 +27,10 @@ namespace _2048
             Tiles = new int[4, 4];
             Score = 0;
         }
-        public SaveGame(Tile[,] Tiles, int Score)
+        public SaveGame(Tile[,] Tiles, int Score, int Moves)
         {
             this.Score = Score;
+            this.Moves = Moves;
             this.Tiles = new int[4, 4];
             for (int i = 0; i < 4; i++)
             {
@@ -72,16 +80,17 @@ namespace _2048
             try
             {
                 var flattenTiles = Helper.FlattenTiles(this.Tiles);
-                Array.Resize(ref flattenTiles, flattenTiles.Length + 1);
-                flattenTiles[flattenTiles.Length - 1] = this.Score;
+                Array.Resize(ref flattenTiles, flattenTiles.Length + 2);
+                flattenTiles[flattenTiles.Length - 1] = this.Moves;
+                flattenTiles[flattenTiles.Length - 2] = this.Score;
                 var bf = new BinaryFormatter();
                 var ms = new MemoryStream();
                 bf.Serialize(ms, flattenTiles);
                 File.WriteAllBytes(filename, ms.ToArray());
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -92,13 +101,28 @@ namespace _2048
                 var bf = new BinaryFormatter();
                 var ms = File.Open(filename, FileMode.Open);
                 var flattenTiles = (int[])bf.Deserialize(ms);
-                this.Score = flattenTiles[flattenTiles.Length - 1];
-                Array.Resize(ref flattenTiles, flattenTiles.Length - 1);
+                var len = flattenTiles.Length;
+                switch (len)
+                {
+                    case 22:
+                        this.Moves = flattenTiles[flattenTiles.Length - 1];
+                        this.Score = flattenTiles[flattenTiles.Length - 2];
+                        Array.Resize(ref flattenTiles, flattenTiles.Length - 2);
+                        Console.WriteLine(len);
+                        break;
+                    case 21:
+                        this.Score = flattenTiles[flattenTiles.Length - 1];
+                        Array.Resize(ref flattenTiles, flattenTiles.Length - 1);
+                        //Console.WriteLine(len);
+                        break;
+                    default:
+                        break;
+                }
                 this.Tiles = Helper.UnflattenTiles(flattenTiles);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
     }
